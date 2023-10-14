@@ -1,0 +1,39 @@
+.start_btn {
+  text-transform: uppercase;
+  padding: 1.5rem;
+  font-size: 4rem;
+  background: none;
+  outline: none;
+  color: white;
+  border: .41rem solid white;
+  transition: all .5s ease-in-out;
+  animation: color-ani 5s ease-in-out infinite;
+  animation-delay: 1s;
+  opacity: 1;
+}
+
+@keyframes color-ani {
+  0% {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  12% {
+    color: rgba(255, 255, 255, 0);
+  }
+
+  24% {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  100% {
+    color: rgba(255, 255, 255, 1);
+  }
+}
+
+.start_btn:hover {
+  cursor: pointer;
+  transform: scale(5);
+  color: rgba(255, 255, 255, 1);
+  border: .41rem solid rgba(0, 0, 0, 0);
+  animation: none;
+}

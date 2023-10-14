@@ -1,0 +1,25 @@
+.button {
+  margin: 1rem;
+  text-transform: uppercase;
+  padding: 1.5rem;
+  font-size: 4rem;
+  background: none;
+  outline: none;
+  color: white;
+  border: .41rem solid white;
+  transition: all .5s ease-in-out;
+  opacity: 1;
+  word-wrap: break-word;
+  max-width: 100vw;
+}
+
+.button:hover, .button:disabled {
+  cursor: pointer;
+  color: rgba(255, 255, 255, .5);
+  border: .41rem solid rgba(0, 0, 0, 0);
+  animation: none;
+}
+
+button:disabled {
+  cursor: default !important;
+}
