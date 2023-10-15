@@ -1,10 +1,13 @@
-import { AccumulativeShadows, Grid, RandomizedLight } from '@react-three/drei';
+import { AccumulativeShadows, Grid, RandomizedLight, useGLTF } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import cn from 'classnames';
 import { memo, useEffect, useRef } from 'react';
 import { useParams } from "react-router-dom";
 import { PerspectiveCamera, Vector3 } from 'three';
 import styles from './GamePage.module.css';
+// eslint-disable-next-line
+//@ts-ignore
+import VTB from './../../assets/3D/VTB.glb';
 
 const camera = new PerspectiveCamera(
   60,  // fov
@@ -18,6 +21,8 @@ const keyPressed: Set<string> = new Set()
 function FinanceScene() {
   camera.position.set(0, 1, -2);
   camera.lookAt(0, 1, 0);
+
+  const {nodes, materials} = useGLTF(VTB);
 
   useFrame((_, delta) => {
     for (const key of keyPressed) {
@@ -48,6 +53,11 @@ function FinanceScene() {
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[1, 1, 1]}/>
       </mesh>
+      <ambientLight/>
+      <pointLight position={[0, 5, 0]} intensity={1000} color="#fff" />
+      <group dispose={null}>
+        <mesh geometry={nodes.VTBLow.geometry} material={materials.M_VTBLow} position={[5.293, 7.908, -0.06]} rotation={[0, 1.571, 0]} scale={0.01} />
+      </group>
     </>
   );
 }
@@ -82,7 +92,6 @@ const GamePage = () => {
 
   useEffect(() => {
     ref.current?.parentElement?.parentElement?.focus();
-    console.log(ref.current?.parentElement?.parentElement);
   }, []);
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
@@ -122,3 +131,5 @@ const GamePage = () => {
 };
 
 export default GamePage;
+
+useGLTF.preload(VTB);
