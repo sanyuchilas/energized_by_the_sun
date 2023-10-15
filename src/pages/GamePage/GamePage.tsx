@@ -2,13 +2,22 @@ import { AccumulativeShadows, Grid, RandomizedLight, useGLTF } from '@react-thre
 import { Canvas, useFrame } from '@react-three/fiber';
 import cn from 'classnames';
 import { memo, useEffect, useRef } from 'react';
-import { useParams } from "react-router-dom";
 import { PerspectiveCamera, Vector3 } from 'three';
 import styles from './GamePage.module.css';
 // eslint-disable-next-line
 //@ts-ignore
-import VTB from './../../assets/3D/VTB.glb';
+import all_static from './../../assets/3D/all_static.glb';
+import T1 from '../../components/Tinkoff/T1';
+import T2 from '../../components/Tinkoff/T2';
+import T3 from '../../components/Tinkoff/T3';
+import S1 from '../../components/Sber/S1';
+import S2 from '../../components/Sber/S2';
+import S3 from '../../components/Sber/S3';
+import V1 from '../../components/VTB/V1';
+import V2 from '../../components/VTB/V2';
+import V3 from '../../components/VTB/V3';
 
+let k = 1;
 const camera = new PerspectiveCamera(
   60,  // fov
   2,   // aspect
@@ -19,45 +28,71 @@ const camera = new PerspectiveCamera(
 const keyPressed: Set<string> = new Set()
 
 function FinanceScene() {
-  camera.position.set(0, 1, -2);
-  camera.lookAt(0, 1, 0);
+  camera.position.set(0, 1, 0);
+  camera.lookAt(0, 1, -1);
 
-  const {nodes, materials} = useGLTF(VTB);
+  const {nodes, materials} = useGLTF(all_static);
 
   useFrame((_, delta) => {
+    k = 1;
+
+    if (keyPressed.has('Shift')) {
+      k = 2;
+    }
+
     for (const key of keyPressed) {
       switch (key) {
+        case 'ц':
         case 'w':
-          camera.translateZ(-delta / 0.1);
+          camera.translateZ(-delta / 0.1 * k);
           break;
+        case 'ы':
         case 's':
-          camera.translateZ(delta / 0.1);
+          camera.translateZ(delta / 0.1 * k);
           break;
+        case 'в':
         case 'd':
-          camera.translateX(delta / 0.1);
+          camera.translateX(delta / 0.1 * k);
           break;
+        case 'ф':
         case 'a':
-          camera.translateX(-delta / 0.1);
+          camera.translateX(-delta / 0.1 * k);
           break;
         default:
+          break;
       }
 
       camera.position.set(camera.position.x, 1, camera.position.z);
     }
   })
+
+  const onT1ClickHanlder = () => {
+    window.open("https://journal.tinkoff.ru/pro/fingram/", "_blank");
+  }
   
   return (
     <>
       <Ground/>
       <Shadows/>
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[1, 1, 1]}/>
-      </mesh>
-      <ambientLight/>
-      <pointLight position={[0, 5, 0]} intensity={1000} color="#fff" />
-      <group dispose={null}>
-        <mesh geometry={nodes.VTBLow.geometry} material={materials.M_VTBLow} position={[5.293, 7.908, -0.06]} rotation={[0, 1.571, 0]} scale={0.01} />
+      <ambientLight intensity={2}/>
+      <pointLight position={[0, 5, 0]} intensity={100} color="#fff" />
+      <pointLight position={[8, 12, 8]} intensity={100} color="#fff" />
+      <pointLight position={[0, 12, -8]} intensity={100} color="#fff" />
+      <pointLight position={[-8, 12, 8]} intensity={100} color="#fff" />
+      <group dispose={null} position={[0, -0.4, 0]}>
+        <mesh geometry={nodes.Curve_1.geometry} material={materials.M_VTBLow} />
+        <mesh geometry={nodes.Curve_2.geometry} material={materials.PaletteMaterial001} />
+        <mesh geometry={nodes.Curve_3.geometry} material={materials.PaletteMaterial002} />
       </group>
+      <T1 onClick={onT1ClickHanlder}/>
+      <T2/>
+      <T3/>
+      <S1/>
+      <S2/>
+      <S3/>
+      <V1/>
+      <V2/>
+      <V3/>
     </>
   );
 }
@@ -85,10 +120,7 @@ const Shadows = memo(() => (
 ))
 
 const GamePage = () => {
-  const params = useParams();
   const ref = useRef<HTMLCanvasElement>(null);
-
-  console.log(params);
 
   useEffect(() => {
     ref.current?.parentElement?.parentElement?.focus();
@@ -132,4 +164,4 @@ const GamePage = () => {
 
 export default GamePage;
 
-useGLTF.preload(VTB);
+useGLTF.preload(all_static);
