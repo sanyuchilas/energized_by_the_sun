@@ -69,6 +69,38 @@ function FinanceScene() {
   const onT1ClickHanlder = () => {
     window.open("https://journal.tinkoff.ru/pro/fingram/", "_blank");
   }
+
+  const onT2ClickHanlder = () => {
+    window.open("https://www.tinkoff.ru/finance/blog/money-management/", "_blank");
+  }
+
+  const onT3ClickHanlder = () => {
+    window.open("https://www.tinkoff.ru/invest/education/", "_blank");
+  }
+
+  const onV1ClickHanlder = () => {
+    window.open("https://www.vtb.ru/personal/drugie-uslugi/fin-gram-pens/", "_blank");
+  }
+
+  const onV2ClickHanlder = () => {
+    window.open("https://learn.vtb.ru/fingram/", "_blank");
+  }
+
+  const onV3ClickHanlder = () => {
+    window.open("https://edu.vtbreg.ru/?GO_S1=Y", "_blank");
+  }
+
+  const onS1ClickHanlder = () => {
+    window.open("https://www.sberbank.com/ru/financialliteracy", "_blank");
+  }
+
+  const onS2ClickHanlder = () => {
+    window.open("https://www.sberbank.ru/ru/person/investments/edu", "_blank");
+  }
+
+  const onS3ClickHanlder = () => {
+    window.open("https://finance.sberuniversity.ru/", "_blank");
+  }
   
   return (
     <>
@@ -85,14 +117,14 @@ function FinanceScene() {
         <mesh geometry={nodes.Curve_3.geometry} material={materials.PaletteMaterial002} />
       </group>
       <T1 onClick={onT1ClickHanlder}/>
-      <T2/>
-      <T3/>
-      <S1/>
-      <S2/>
-      <S3/>
-      <V1/>
-      <V2/>
-      <V3/>
+      <T2 onClick={onT2ClickHanlder}/>
+      <T3 onClick={onT3ClickHanlder}/>
+      <S1 onClick={onS1ClickHanlder}/>
+      <S2 onClick={onS2ClickHanlder}/>
+      <S3 onClick={onS3ClickHanlder}/>
+      <V1 onClick={onV1ClickHanlder}/>
+      <V2 onClick={onV2ClickHanlder}/>
+      <V3 onClick={onV3ClickHanlder}/>
     </>
   );
 }
