@@ -18,6 +18,7 @@ import V2 from '../../components/VTB/V2';
 import V3 from '../../components/VTB/V3';
 
 let k = 1;
+let previousTouch: React.Touch | null = null;
 const camera = new PerspectiveCamera(
   60,  // fov
   2,   // aspect
@@ -175,6 +176,18 @@ const GamePage = () => {
     }
   }
 
+  const handleTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    const touch = e.touches[0];
+    if (!previousTouch) {
+      previousTouch = touch;
+    }
+    camera.rotateOnWorldAxis(
+      new Vector3(0, 1, 0), -(touch.pageX - previousTouch.pageX) * 0.002
+    );
+    camera.rotateX(-(touch.pageY - previousTouch.pageY) * 0.002);
+    previousTouch = touch;
+  }
+
   return (
     <>
      <Canvas
@@ -183,6 +196,8 @@ const GamePage = () => {
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
         onMouseMove={handleMouseMove}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={() => previousTouch = null}
         onContextMenu={e => e.preventDefault()}
         className={cn(styles.canvas)}
         camera={camera}
