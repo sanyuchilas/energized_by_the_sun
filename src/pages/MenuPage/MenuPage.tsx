@@ -28,7 +28,7 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="fade-container">
+    <div className="fade-container scale-container">
       <div className={cn(styles.container, fade && 'fade-page')}>
         <MyButton
           onClick={() => onMenuButtonClick(Buttons.BUTTON_1)}

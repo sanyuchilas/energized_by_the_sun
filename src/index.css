@@ -13,6 +13,10 @@ body, html, #root {
 }
 
 .fade-container {
+  animation: ani-container-fade .5s ease-out;
+}
+
+.scale-container {
   animation: ani-container-scale .5s ease-out;
 }
 
@@ -23,15 +27,23 @@ body, html, #root {
   opacity: 0;
 }
 
-@keyframes ani-container-scale {
+@keyframes ani-container-fade {
   0% {
-    transform: scale(0);
     filter: blur(4px);
   }
   
   100% {
-    transform: scale(1);
     filter: blur(0);
+  }
+}
+
+@keyframes ani-container-scale {
+  0% {
+    transform: scale(0);
+  }
+  
+  100% {
+    transform: scale(1);
   }
 }
 

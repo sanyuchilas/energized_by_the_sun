@@ -1,0 +1,9 @@
+.click_to_start {
+  position: absolute;
+}
+
+.canvas {
+  height: 100%;
+  width: 100%;
+  outline: none;
+}

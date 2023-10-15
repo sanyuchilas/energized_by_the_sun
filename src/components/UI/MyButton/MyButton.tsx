@@ -3,7 +3,10 @@ import cn from 'classnames'
 
 const MyButton = ({...props}) => {
   return (
-    <button className={cn(styles.button)} {...props}>{props.children}</button>
+    <button
+      className={cn(styles.button, props.classes)}
+      {...props}
+    >{props.children}</button>
   );
 };
 

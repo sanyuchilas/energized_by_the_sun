@@ -1,7 +1,9 @@
+import styles from './NotFoundPage.module.css'
+
 const NotFoundPage = () => {
   return (
-    <div>
-      Страница не найдена
+    <div className={styles.container}>
+      <span>Страница не найдена</span>
     </div>
   );
 };

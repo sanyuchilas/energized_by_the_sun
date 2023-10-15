@@ -11,7 +11,7 @@ const MainPage = () => {
   }
 
   return (
-    <div className={cn("fade-container", fade && 'fade-page')}>
+    <div className={cn("fade-container scale-container", fade && 'fade-page')}>
       <button
         className={cn(styles.start_btn)}
         onClick={onStartButtonClick}
